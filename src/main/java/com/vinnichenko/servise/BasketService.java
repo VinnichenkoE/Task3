@@ -32,4 +32,8 @@ public class BasketService {
     public int numberOfBallsByColor(final BallColor color, Basket basket) {
         return (int) basket.getBalls().stream().filter(o -> o.getColor().equals(color)).count();
     }
+
+    public double weightOfBalls (Basket basket) {
+        return basket.getBalls().stream().mapToDouble(Ball::getWeight).sum();
+    }
 }
