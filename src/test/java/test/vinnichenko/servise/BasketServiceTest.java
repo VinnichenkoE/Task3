@@ -89,7 +89,7 @@ public class BasketServiceTest {
     public void testWeightOfBalls(Basket basket) {
         double expected = 32.0;
         double actual = basketService.weightOfBalls(basket);
-        assertEquals(actual, expected);
+        assertEquals(actual, expected, 0.001);
 
     }
 }
