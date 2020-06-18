@@ -13,9 +13,9 @@ public class BasketCreator {
         Ball ball2 = new Ball(BallColor.BLUE, 12.0, 10.0);
         Ball ball3 = new Ball(BallColor.BLACK, 8.5, 15.0);
         Basket basket = new Basket(50.0, 50.0, new ArrayList<>());
-        basket.add(ball1);
-        basket.add(ball2);
-        basket.add(ball3);
+        basket.addBall(ball1);
+        basket.addBall(ball2);
+        basket.addBall(ball3);
         return basket;
     }
 }

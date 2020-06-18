@@ -1,15 +1,16 @@
 package com.vinnichenko.task3.entity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Basket {
     private double carrying;
-    private double capacity;
+    private double volume;
     private List<Ball> balls;
 
-    public Basket(double carrying, double capacity, List<Ball> balls) {
+    public Basket(double carrying, double volume, List<Ball> balls) {
         this.carrying = carrying;
-        this.capacity = capacity;
+        this.volume = volume;
         this.balls = balls;
     }
 
@@ -17,24 +18,24 @@ public class Basket {
         return carrying;
     }
 
-    public double getCapacity() {
-        return capacity;
+    public double getVolume() {
+        return volume;
     }
 
     public List<Ball> getBalls() {
-        return balls;
+        return Collections.unmodifiableList(balls);
     }
 
     public boolean isFit(Ball ball) {
-        return getCarrying() - ball.getWeight() >= 0 && getCapacity() - ball.getVolume() >= 0;
+        return getCarrying() - ball.getWeight() >= 0 && getVolume() - ball.getVolume() >= 0;
     }
 
-    public boolean add(Ball ball) {
+    public boolean addBall(Ball ball) {
         if (ball == null) {
             return false;
         }
         if (isFit(ball)) {
-            capacity -= ball.getVolume();
+            volume -= ball.getVolume();
             carrying -= ball.getWeight();
             return balls.add(ball);
         }
@@ -53,7 +54,7 @@ public class Basket {
         if (Double.compare(basket.carrying, carrying) != 0) {
             return false;
         }
-        if (Double.compare(basket.capacity, capacity) != 0) {
+        if (Double.compare(basket.volume, volume) != 0) {
             return false;
         }
         return balls != null ? balls.equals(basket.balls) : basket.balls == null;
@@ -65,7 +66,7 @@ public class Basket {
         long temp;
         temp = Double.doubleToLongBits(carrying);
         result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(capacity);
+        temp = Double.doubleToLongBits(volume);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (balls != null ? balls.hashCode() : 0);
         return result;
@@ -75,7 +76,7 @@ public class Basket {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Basket{");
         sb.append("carrying=").append(carrying);
-        sb.append(", capacity=").append(capacity);
+        sb.append(", volume=").append(volume);
         sb.append(", balls=").append(balls);
         sb.append('}');
         return sb.toString();
