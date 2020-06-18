@@ -3,37 +3,32 @@ package com.vinnichenko.servise;
 import com.vinnichenko.entity.Ball;
 import com.vinnichenko.entity.BallColor;
 import com.vinnichenko.entity.Basket;
-import com.vinnichenko.exception.ProgramException;
-
-import java.util.List;
 
 public class BasketService {
 
-    public boolean isFit(Ball ball, Basket basket) {
-        return basket.getCarrying() - ball.getWeight() >= 0 && basket.getCapacity() - ball.getVolume() >= 0;
-    }
-
-    public void putBallInBasket(Ball ball, Basket basket) throws ProgramException {
-        if (isFit(ball, basket)) {
-            List<Ball> ballList = basket.getBalls();
-            ballList.add(ball);
-            Double carrying = basket.getCarrying();
-            carrying -= ball.getWeight();
-            Double capacity = basket.getCapacity();
-            capacity -= ball.getVolume();
-            basket.setCarrying(carrying);
-            basket.setCapacity(capacity);
-            basket.setBalls(ballList);
-        } else {
-            throw new ProgramException("the ball does not fit in the basket");
+    public int numberOfBallsByColor(BallColor color, Basket basket) {
+        int count = 0;
+        for (Ball ball : basket.getBalls()) {
+            if (ball.getColor().equals(color)) {
+                count++;
+            }
         }
+        return count;
     }
 
-    public int numberOfBallsByColor(final BallColor color, Basket basket) {
+    public int numberOfBallsByColor2(BallColor color, Basket basket) {
         return (int) basket.getBalls().stream().filter(o -> o.getColor().equals(color)).count();
     }
 
-    public double weightOfBalls (Basket basket) {
+    public double weightOfBalls(Basket basket) {
+        double weight = 0;
+        for (Ball ball : basket.getBalls()) {
+            weight += ball.getWeight();
+        }
+        return weight;
+    }
+
+    public double weightOfBalls2(Basket basket) {
         return basket.getBalls().stream().mapToDouble(Ball::getWeight).sum();
     }
 }

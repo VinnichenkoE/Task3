@@ -1,23 +1,23 @@
 package com.vinnichenko.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-    private Double carrying;
-    private Double capacity;
-    private List<Ball> balls = new ArrayList<>();
+    private double carrying;
+    private double capacity;
+    private List<Ball> balls;
 
-    public Basket(Double carrying, Double capacity) {
+    public Basket(double carrying, double capacity, List<Ball> balls) {
         this.carrying = carrying;
         this.capacity = capacity;
+        this.balls = balls;
     }
 
-    public Double getCarrying() {
+    public double getCarrying() {
         return carrying;
     }
 
-    public Double getCapacity() {
+    public double getCapacity() {
         return capacity;
     }
 
@@ -25,34 +25,48 @@ public class Basket {
         return balls;
     }
 
-    public void setCarrying(Double carrying) {
-        this.carrying = carrying;
+    public boolean isFit(Ball ball) {
+        return getCarrying() - ball.getWeight() >= 0 && getCapacity() - ball.getVolume() >= 0;
     }
 
-    public void setCapacity(Double capacity) {
-        this.capacity = capacity;
-    }
-
-    public void setBalls(List<Ball> balls) {
-        this.balls = balls;
+    public boolean add(Ball ball) {
+        if (ball == null) {
+            return false;
+        }
+        if (isFit(ball)) {
+            capacity -= ball.getVolume();
+            carrying -= ball.getWeight();
+            return balls.add(ball);
+        }
+        return false;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Basket basket = (Basket) o;
-
-        if (carrying != null ? !carrying.equals(basket.carrying) : basket.carrying != null) return false;
-        if (capacity != null ? !capacity.equals(basket.capacity) : basket.capacity != null) return false;
+        if (Double.compare(basket.carrying, carrying) != 0) {
+            return false;
+        }
+        if (Double.compare(basket.capacity, capacity) != 0) {
+            return false;
+        }
         return balls != null ? balls.equals(basket.balls) : basket.balls == null;
     }
 
     @Override
     public int hashCode() {
-        int result = carrying != null ? carrying.hashCode() : 0;
-        result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(carrying);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(capacity);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (balls != null ? balls.hashCode() : 0);
         return result;
     }
