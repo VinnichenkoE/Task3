@@ -1,4 +1,4 @@
-package com.vinnichenko.task3.servise;
+package com.vinnichenko.task3.service;
 
 import com.vinnichenko.task3.entity.Ball;
 import com.vinnichenko.task3.entity.BallColor;

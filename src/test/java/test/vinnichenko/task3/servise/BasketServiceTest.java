@@ -3,7 +3,7 @@ package test.vinnichenko.task3.servise;
 import com.vinnichenko.task3.creator.BasketCreator;
 import com.vinnichenko.task3.entity.BallColor;
 import com.vinnichenko.task3.entity.Basket;
-import com.vinnichenko.task3.servise.BasketService;
+import com.vinnichenko.task3.service.BasketService;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
