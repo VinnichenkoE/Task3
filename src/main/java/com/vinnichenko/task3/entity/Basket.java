@@ -1,4 +1,4 @@
-package com.vinnichenko.entity;
+package com.vinnichenko.task3.entity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.vinnichenko.exception;
+package com.vinnichenko.task3.exception;
 
 public class ProgramException extends Exception {
     public ProgramException() {

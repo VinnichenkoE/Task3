@@ -1,8 +1,8 @@
-package com.vinnichenko.servise;
+package com.vinnichenko.task3.servise;
 
-import com.vinnichenko.entity.Ball;
-import com.vinnichenko.entity.BallColor;
-import com.vinnichenko.entity.Basket;
+import com.vinnichenko.task3.entity.Ball;
+import com.vinnichenko.task3.entity.BallColor;
+import com.vinnichenko.task3.entity.Basket;
 
 public class BasketService {
 

@@ -1,18 +1,12 @@
-package test.vinnichenko.servise;
+package test.vinnichenko.task3.servise;
 
-import com.vinnichenko.creator.BasketCreator;
-import com.vinnichenko.entity.Ball;
-import com.vinnichenko.entity.BallColor;
-import com.vinnichenko.entity.Basket;
-import com.vinnichenko.exception.ProgramException;
-import com.vinnichenko.servise.BasketService;
+import com.vinnichenko.task3.creator.BasketCreator;
+import com.vinnichenko.task3.entity.BallColor;
+import com.vinnichenko.task3.entity.Basket;
+import com.vinnichenko.task3.servise.BasketService;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.testng.Assert.*;
 
