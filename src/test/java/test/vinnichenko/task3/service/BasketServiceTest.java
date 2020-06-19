@@ -1,4 +1,4 @@
-package test.vinnichenko.task3.servise;
+package test.vinnichenko.task3.service;
 
 import com.vinnichenko.task3.creator.BasketCreator;
 import com.vinnichenko.task3.entity.BallColor;
