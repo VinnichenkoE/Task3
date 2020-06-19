@@ -7,9 +7,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class BasketTest {
 
@@ -21,42 +21,16 @@ public class BasketTest {
     }
 
     @Test
-    public void testIsFitPositive() {
-        Ball ball = new Ball(BallColor.BLACK, 5.0, 5.0);
-        boolean condition = basket.addBall(ball);
-        assertTrue(condition);
-    }
-
-    @Test
-    public void testIsFitNegative() {
-        Ball ball = new Ball(BallColor.BLACK, 15.0, 15.0);
-        boolean condition = basket.addBall(ball);
-        assertFalse(condition);
-    }
-
-    @Test
-    public void testAddBallNull() {
+    public void addTestNull() {
         Ball ball = null;
-        boolean condition = basket.addBall(ball);
+        boolean condition = basket.add(ball);
         assertFalse(condition);
     }
 
     @Test
-    public void testAddBallFit() {
+    public void addTest() {
         Ball ball = new Ball(BallColor.BLACK, 5.0, 5.0);
-        List<Ball> balls = new ArrayList<Ball>() {{
-            add(ball);
-        }};
-        List<Ball> expected = balls;
-        basket.addBall(ball);
-        List<Ball> actual = basket.getBalls();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testAddBallNotFit() {
-        Ball ball = new Ball(BallColor.BLACK, 15.0, 15.0);
-        boolean condition = basket.addBall(ball);
-        assertFalse(condition);
+        boolean condition = basket.add(ball);
+        assertTrue(condition);
     }
 }

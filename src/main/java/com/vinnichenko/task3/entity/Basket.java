@@ -4,43 +4,33 @@ import java.util.Collections;
 import java.util.List;
 
 public class Basket {
-    private double currentCarrying;
-    private double currentVolume;
+    private final double carrying;
+    private final double volume;
     private List<Ball> balls;
 
     public Basket(double carrying, double volume, List<Ball> balls) {
-        this.currentCarrying = carrying;
-        this.currentVolume = volume;
+        this.carrying = carrying;
+        this.volume = volume;
         this.balls = balls;
     }
 
-    public double getCurrentCarrying() {
-        return currentCarrying;
+    public double getCarrying() {
+        return carrying;
     }
 
-    public double getCurrentVolume() {
-        return currentVolume;
+    public double getVolume() {
+        return volume;
     }
 
     public List<Ball> getBalls() {
         return Collections.unmodifiableList(balls);
     }
 
-    public boolean isFit(Ball ball) {
-        return getCurrentCarrying() - ball.getWeight() >= 0
-                && getCurrentVolume() - ball.getVolume() >= 0;
-    }
-
-    public boolean addBall(Ball ball) {
+    public boolean add(Ball ball) {
         if (ball == null) {
             return false;
         }
-        if (isFit(ball)) {
-            currentVolume -= ball.getVolume();
-            currentCarrying -= ball.getWeight();
-            return balls.add(ball);
-        }
-        return false;
+        return balls.add(ball);
     }
 
     @Override
@@ -52,10 +42,10 @@ public class Basket {
             return false;
         }
         Basket basket = (Basket) o;
-        if (Double.compare(basket.currentCarrying, currentCarrying) != 0) {
+        if (Double.compare(basket.carrying, carrying) != 0) {
             return false;
         }
-        if (Double.compare(basket.currentVolume, currentVolume) != 0) {
+        if (Double.compare(basket.volume, volume) != 0) {
             return false;
         }
         return balls != null ? balls.equals(basket.balls) : basket.balls == null;
@@ -65,9 +55,9 @@ public class Basket {
     public int hashCode() {
         int result;
         long temp;
-        temp = Double.doubleToLongBits(currentCarrying);
+        temp = Double.doubleToLongBits(carrying);
         result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(currentVolume);
+        temp = Double.doubleToLongBits(volume);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (balls != null ? balls.hashCode() : 0);
         return result;
@@ -76,8 +66,8 @@ public class Basket {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Basket{");
-        sb.append("currentCarrying=").append(currentCarrying);
-        sb.append(", currentVolume=").append(currentVolume);
+        sb.append("carrying=").append(carrying);
+        sb.append(", volume=").append(volume);
         sb.append(", balls=").append(balls);
         sb.append('}');
         return sb.toString();
