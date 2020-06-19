@@ -4,51 +4,46 @@ import com.vinnichenko.task3.creator.BasketCreator;
 import com.vinnichenko.task3.entity.BallColor;
 import com.vinnichenko.task3.entity.Basket;
 import com.vinnichenko.task3.service.BasketService;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class BasketServiceTest {
 
     BasketService basketService;
+    Basket basket;
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() {
         basketService = new BasketService();
-    }
-
-    @DataProvider(name = "basket")
-    public Object[] createData() {
         BasketCreator basketCreator = new BasketCreator();
-        Basket basket = basketCreator.createBasket();
-        return new Object[]{basket};
+        basket = basketCreator.createBasket();
     }
 
-    @Test(dataProvider = "basket")
-    public void testNumberOfBallsByColor(Basket basket) {
+    @Test
+    public void testNumberOfBallsByColor() {
         int expected = 2;
         int actual = basketService.numberOfBallsByColor(BallColor.BLUE, basket);
         assertEquals(actual, expected);
     }
 
-    @Test(dataProvider = "basket")
-    public void testNumberOfBallsByColor2(Basket basket) {
+    @Test
+    public void testNumberOfBallsByColor2() {
         int expected = 2;
         int actual = basketService.numberOfBallsByColor2(BallColor.BLUE, basket);
         assertEquals(actual, expected);
     }
 
-    @Test(dataProvider = "basket")
-    public void testWeightOfBalls(Basket basket) {
+    @Test
+    public void testWeightOfBalls() {
         double expected = 32.0;
         double actual = basketService.weightOfBalls(basket);
         assertEquals(actual, expected, 0.001);
     }
 
-    @Test(dataProvider = "basket")
-    public void testWeightOfBalls2(Basket basket) {
+    @Test
+    public void testWeightOfBalls2() {
         double expected = 32.0;
         double actual = basketService.weightOfBalls2(basket);
         assertEquals(actual, expected, 0.001);
