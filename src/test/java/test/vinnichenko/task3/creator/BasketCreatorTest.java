@@ -6,6 +6,7 @@ import com.vinnichenko.task3.entity.Ball;
 import com.vinnichenko.task3.entity.BallColor;
 import com.vinnichenko.task3.entity.Basket;
 import com.vinnichenko.task3.exception.ProgramException;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.text.ParseException;
@@ -15,9 +16,15 @@ import static org.testng.Assert.*;
 
 public class BasketCreatorTest {
 
+    BasketCreator basketCreator;
+
+    @BeforeMethod
+    public void setUp() {
+        basketCreator = new BasketCreator();
+    }
+
     @Test
     public void createBasketTest() {
-        BasketCreator basketCreator = new BasketCreator();
         Basket expected = new Basket(50.0, 50.0, new ArrayList<Ball>());
         try {
             Basket actual = basketCreator.createBasket(50.0, 50.0, new ArrayList<Ball>());
@@ -29,13 +36,11 @@ public class BasketCreatorTest {
 
     @Test(expectedExceptions = ProgramException.class)
     public void createBasketTestException() throws ProgramException {
-        BasketCreator basketCreator = new BasketCreator();
         basketCreator.createBasket(120.0, 50.0, new ArrayList<Ball>());
     }
 
     @Test(expectedExceptions = ProgramException.class)
     public void createBasketTestNull() throws ProgramException {
-        BasketCreator basketCreator = new BasketCreator();
         basketCreator.createBasket(75.0, 50.0, null);
     }
 }

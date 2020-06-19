@@ -37,7 +37,6 @@ public class BasketCreator {
             basketService.putBall(basket, ball1);
             basketService.putBall(basket, ball2);
             basketService.putBall(basket, ball3);
-
         } catch (ProgramException e) {
             e.printStackTrace();
         }
